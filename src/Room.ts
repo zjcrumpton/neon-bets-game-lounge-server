@@ -8,6 +8,7 @@ export class Room {
 
     constructor() {
         this._id = `ROOM-${Room.COUNT}`;
+        Room.COUNT++;
     }
 
     public addPlayer(socket: Socket, name: string) {
