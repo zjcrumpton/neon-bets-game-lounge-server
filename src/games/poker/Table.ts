@@ -1,11 +1,13 @@
-import { Player } from "./Player";
+import { Player } from "../../types/Player";
+import { PokerPlayer } from "./PokerPlayer";
 
 export class Table {
-    private _seats: Player[] = [];
+    private _seats: PokerPlayer[] = [];
     private _dealerIndex = 0;
     
     public joinTable(newPlayer: Player) {
-        this._seats.push(newPlayer);
+        const pokerPlayer = new PokerPlayer(newPlayer.socket, newPlayer.name, newPlayer.roomId);
+        this._seats.push(pokerPlayer);
     }
 
     get seats() {

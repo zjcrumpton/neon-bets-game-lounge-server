@@ -1,10 +1,12 @@
 import { Socket } from "socket.io";
+import { Poker } from "./games";
 import { GameEvent } from "./types/GameEvent";
 import { Player } from "./types/Player";
 
 export class Room {
     private _id: string;
     private _players: { [key: string]: Player } = {};
+    private _game: Poker = new Poker();
     private static COUNT = 0;
 
     constructor() {

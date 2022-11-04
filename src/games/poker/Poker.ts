@@ -1,23 +1,20 @@
 import { Deck } from "./Deck";
-import { Player } from "./Player";
 import { Table } from "./Table";
 
 export class Poker {
-    private _deck: Deck;
+    private _deck: Deck = new Deck();
     private _table: Table;
-    private _bigBlind: number;
+    private _bigBlind: number = 50;
 
-    constructor(bigBlind: number = 50) {
-        this._deck = new Deck();
-        this._deck.shuffle();
+    constructor() {
         this._table = new Table();
-        this._bigBlind = bigBlind;
-
-        this.startGame();
     }
 
-    public startGame() {
+    public startGame(bigBlind?: number) {
         if (this._table.seats.length >= 2) {
+            this._bigBlind = bigBlind || this._bigBlind;
+            this._deck.shuffle();
+
             console.log('start game');
         }
     }
@@ -28,5 +25,9 @@ export class Poker {
 
     get smallBlind() {
         return this._bigBlind / 2;
+    }
+
+    get table() {
+        return this._table;
     }
 }
