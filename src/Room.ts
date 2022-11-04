@@ -15,7 +15,7 @@ export class Room {
     }
 
     public addPlayer(socket: Socket, name: string) {
-        console.log(socket.id, name, this._players)
+        console.log('adding player', socket.id, name, this._players);
         if (this._players[socket.id]) {
             return;
         }
