@@ -40,4 +40,8 @@ export class Room {
     get id() {
         return this._id;
     }
+
+    get playerCount() {
+        return Object.keys(this._players).length;
+    }
 }
