@@ -1,15 +1,15 @@
-import { Request, Response } from 'express';
+import { Socket } from 'socket.io';
 import { Room } from '../Room';
 import { Rooms } from '../server';
 
-export const handleNewRoom = (_req: Request, res: Response) => {
+interface NewRoomData {
+    playerName: string,
+}
+
+export const handleNewRoom = (socket: Socket, data: NewRoomData) => {
     const newRoom = new Room();
     Rooms[newRoom.id] = newRoom;
 
-    res.status(201).json({
-        msg: 'room succesfully created',
-        roomId: newRoom.id,
-    });
-
-    console.log(Rooms)
+    socket.join(newRoom.id);
+    newRoom.addPlayer(socket, data.playerName);
 };

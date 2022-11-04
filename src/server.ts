@@ -6,7 +6,11 @@ import { Room } from './Room';
 
 const app = express();
 const http = HTTP.createServer(app);
-const io = new Server(http);
+const io = new Server(http, {
+    cors: {
+        origin: '*',
+    }
+});
 
 app.use(cors());
 

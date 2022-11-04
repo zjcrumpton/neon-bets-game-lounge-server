@@ -1,9 +1,10 @@
 import { Socket } from "socket.io";
+import { GameEvent } from "./types/GameEvent";
 import { Player } from "./types/Player";
 
 export class Room {
     private _id: string;
-    private _players: { [key: string]: Player };
+    private _players: { [key: string]: Player } = {};
     private static COUNT = 0;
 
     constructor() {
@@ -12,6 +13,7 @@ export class Room {
     }
 
     public addPlayer(socket: Socket, name: string) {
+        console.log(socket.id, name, this._players)
         if (this._players[socket.id]) {
             return;
         }
@@ -22,6 +24,10 @@ export class Room {
             socket,
             roomId: this._id,
         };
+
+        socket.emit(GameEvent.JOINED_ROOM, {
+            roomId: this._id,
+        });
     }
 
     public removePlayer(id: string) {
