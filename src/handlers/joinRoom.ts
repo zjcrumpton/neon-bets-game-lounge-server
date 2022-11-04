@@ -6,7 +6,7 @@ interface JoinRoomData {
     playerName: string;
 }
 
-export const handlejoinRoom = (socket: Socket, data: JoinRoomData) => {
+export const handleJoinRoom = (socket: Socket, data: JoinRoomData) => {
     const room = Object.values(Rooms).find((room) => room.id === data.roomId);
     if (room) {
         room.addPlayer(socket, data.playerName);

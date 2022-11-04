@@ -1,6 +1,6 @@
 import { Socket } from "socket.io/dist/socket";
 import { GameEvent } from "../types/GameEvent";
-import { handlejoinRoom } from "./joinRoom";
+import { handleJoinRoom } from "./joinRoom";
 import { handleNewRoom } from "./newRoom";
 
 export const onConnection = (socket: Socket) => {
@@ -10,5 +10,5 @@ export const onConnection = (socket: Socket) => {
 
 const registerGameEvents = (socket: Socket) => {
     socket.on(GameEvent.NEW_ROOM, (data) => handleNewRoom(socket, data));
-    socket.on(GameEvent.JOIN_ROOM, (data) => handlejoinRoom(socket, data));
+    socket.on(GameEvent.JOIN_ROOM, (data) => handleJoinRoom(socket, data));
 };
