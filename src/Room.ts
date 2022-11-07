@@ -35,6 +35,8 @@ export class Room {
             roomId: this._name,
         };
 
+        socket.join(this._code);
+
         socket.emit(GameEvent.JOINED_ROOM, {
             roomId: this._name,
         });
