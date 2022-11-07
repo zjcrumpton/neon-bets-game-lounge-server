@@ -1,15 +1,15 @@
 import { Socket } from "socket.io";
-import { Poker } from "./games";
 import { GameEvent } from "./types/GameEvent";
 import { Player } from "./types/Player";
 import { v4 as uuid } from 'uuid';
 import { Rooms } from "./server";
+import { Game } from "./types/Game";
 
 export class Room {
     private _name: string;
     private _code: string;
     private _players: { [key: string]: Player } = {};
-    private _game: Poker = new Poker();
+    private _gameType: Game;
     private static COUNT = 0;
 
     constructor(name?: string, code?: string) {
@@ -46,6 +46,10 @@ export class Room {
         }
     }
 
+    public setGame(game: Game) {
+        this._gameType = game;
+    }
+
     get name() {
         return this._name;
     }
@@ -60,5 +64,9 @@ export class Room {
 
     get players() {
         return this._players;
+    }
+
+    get game() {
+        return this._gameType;
     }
 }
