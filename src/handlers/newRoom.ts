@@ -18,4 +18,6 @@ export const handleNewRoom = (socket: Socket, data: NewRoomData) => {
     socket.emit(GameEvent.UPDATE_ROOMS, {
         rooms: Object.keys(Rooms),
     });
+
+    socket.emit(GameEvent.ROOM_CREATED, newRoom.code);
 };
