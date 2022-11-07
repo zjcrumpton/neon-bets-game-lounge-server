@@ -8,6 +8,7 @@ export const handleGetRooms = (_req: Request, res: Response) => {
     roomKeys.forEach((key) => {
         roomData.push({
             id: key,
+            name: Rooms[key].name,
             playerCount: Rooms[key].playerCount,
         });
     });
