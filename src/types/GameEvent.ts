@@ -3,4 +3,5 @@ export enum GameEvent {
     JOINED_ROOM = 'JOINED_ROOM',
     JOIN_ROOM = 'JOIN_ROOM',
     UPDATE_ROOMS = 'UPDATE_ROOMS',
+    ROOM_CREATED = 'ROOM_CREATED',
 }

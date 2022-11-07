@@ -12,7 +12,9 @@ const io = new Server(http, {
     }
 });
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+}));
 
 const Rooms: { [key: string]: Room } = {};
 
