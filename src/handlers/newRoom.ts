@@ -2,6 +2,13 @@ import { Socket } from 'socket.io';
 import { Room } from '../Room';
 import { Rooms } from '../server';
 import { GameEvent } from '../types/GameEvent';
+import { Player } from '../types/Player';
+
+interface RoomData {
+    name: string,
+    code: string,
+    players: Omit<Player, "socket">[],
+}
 
 interface NewRoomData {
     playerName: string,
@@ -18,5 +25,15 @@ export const handleNewRoom = (socket: Socket, data: NewRoomData) => {
         rooms: Object.keys(Rooms),
     });
 
-    socket.emit(GameEvent.ROOM_CREATED, newRoom.code);
+    const roomPayload: RoomData = {
+        name: newRoom.name,
+        code: newRoom.code,
+        players: Object.values(newRoom.players).map(player => ({
+            id: player.id,
+            roomId: newRoom.code,
+            name: player.name,
+        })),
+    }
+
+    socket.emit(GameEvent.ROOM_CREATED, roomPayload);
 };
